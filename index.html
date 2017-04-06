@@ -8,12 +8,13 @@
     </head>
  
     <body>
-        <canvas id="myCanvas"></canvas>
+        <canvas id="myCanvas" width="800" height="600"></canvas>
           <script>
-            sleepFor(1000);
-            var points = [];
             var size = 10;
             var backPlane = 100;
+            var frontPlane = 10;
+
+            var points = [];
             for(var z = 0;z<10;z++){
                 for(var x = 10-z;x<10;x++){
                     for(var y = 10-z;y<10;y++){
@@ -23,21 +24,24 @@
             }
             var c=document.getElementById("myCanvas");
             var ctx=c.getContext("2d");
- 
+
             setInterval(update,20);
             update();
- 
+
             function render(){
                 ctx.clearRect(0, 0, c.width, c.height);
+                points.sort(function(p1,p2){
+                    return p1.y - p2.y;
+                });
                 for(var i = 0; i< points.length; i++){
                     var point = points[i];
-                    var x = point.x + 20;
-                    var y = point.y + 20;
-                    var z = point.z;
-                    if(y<0.1||y>backPlane){
+                    var x = point.x + 40;
+                    var y = point.y + 25;
+                    var z = point.z + 30;
+                    if(y<frontPlane||y>backPlane){
+                        //console.log(x + ' ' + y + ' ' + z);
                         continue;
                     }
-                    //console.log(x + '  ' + y + ' ' + z);
                     ctx.fillStyle = point.color;
                     var dist = (backPlane-y)/backPlane;
                     var thisSize = size/dist;
@@ -48,6 +52,7 @@
             function update(){
                 for(var i =0;i < points.length; i++){
                     rotateZ(points[i],0.1);
+                    rotateY(points[i],-0.01);
                 }
                 render();
             }
@@ -60,10 +65,13 @@
                 point.y = Math.sin(angle)*x + Math.cos(angle)*y;
                 point.z = z;
             }
- 
-            function sleepFor( sleepDuration ){
-                var now = new Date().getTime();
-                while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+            function rotateY(point,angle){
+                var x = point.x;
+                var y = point.y;
+                var z = point.z;
+                point.x = Math.cos(angle)*x + Math.sin(angle)*z;
+                point.y = y;
+                point.z = -1*Math.sin(angle)*x + Math.cos(angle)*z;
             }
           </script>
     </body>
