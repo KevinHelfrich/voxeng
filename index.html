@@ -1,12 +1,12 @@
 <!doctype html>
- 
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
- 
+
         <title>Voxels</title>
     </head>
- 
+
     <body>
         <canvas id="myCanvas" width="800" height="600"></canvas>
           <script>
@@ -48,7 +48,7 @@
                     ctx.fillRect((x*size)-thisSize,(z*size)-thisSize,2*thisSize,2*thisSize);
                 }
             }
- 
+
             function update(){
                 for(var i =0;i < points.length; i++){
                     rotateZ(points[i],0.1);
@@ -56,7 +56,7 @@
                 }
                 render();
             }
- 
+
             function rotateZ(point,angle){
                 var x = point.x;
                 var y = point.y;
