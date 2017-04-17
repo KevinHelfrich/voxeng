@@ -7,7 +7,8 @@ gulp.task('build-engine-typescript', function(){
     return gulp.src('src/**/*.ts')
         .pipe(ts({
             noImplicitAny: true,
-            out: 'voxEng.js'
+            out: 'voxEng.js',
+            module: 'system'
         }))
         .pipe(gulp.dest('build/engine'))
         .pipe(gulp.dest('build/examples'));
