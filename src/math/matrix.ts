@@ -1,5 +1,4 @@
-import {Vector} from './Vector';
-export class Matrix{
+class Matrix{
     elements: number[];
 
     constructor(){

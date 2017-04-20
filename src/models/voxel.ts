@@ -1,6 +1,4 @@
-import {Vector} from '../math/Vector';
-
-export class Voxel{
+class Voxel{
     position: Vector;
     color: string;
 
